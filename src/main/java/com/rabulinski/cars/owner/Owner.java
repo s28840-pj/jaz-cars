@@ -2,19 +2,13 @@ package com.rabulinski.cars.owner;
 
 import com.rabulinski.cars.car.Car;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
