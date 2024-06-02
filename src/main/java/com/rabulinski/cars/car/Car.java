@@ -2,7 +2,7 @@ package com.rabulinski.cars.car;
 
 import com.rabulinski.cars.owner.Owner;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.rabulinski.cars.car;
 
-import lombok.*;
+import lombok.Data;
 
 import java.util.UUID;
 
