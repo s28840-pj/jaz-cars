@@ -4,6 +4,8 @@ import com.rabulinski.cars.owner.Owner;
 import com.rabulinski.cars.owner.OwnerNotFoundException;
 import com.rabulinski.cars.owner.OwnerRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,35 +22,35 @@ public class CarService {
     private final CarMapper mapper;
 
     @Transactional
-    public CarResponse createCar(CarCreateRequest request) {
-        UUID ownerId = request.getOwnerId();
-        Owner owner = ownerRepository.findById(ownerId).orElseThrow(() -> new OwnerNotFoundException(ownerId));
-        Car car = mapper.toEntity(request, owner);
-        car = carRepository.save(car);
-        return mapper.toResponse(car);
+    public CarResponse createCar(@NotNull @Valid final CarCreateRequest request) {
+        final UUID ownerId = request.getOwnerId();
+        final Owner owner = this.ownerRepository.findById(ownerId).orElseThrow(() -> new OwnerNotFoundException(ownerId));
+        Car car = this.mapper.toEntity(request, owner);
+        car = this.carRepository.save(car);
+        return this.mapper.toResponse(car);
     }
 
     @Transactional
-    public CarResponse getCarById(UUID id) {
-        Car car = carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id));
-        return mapper.toResponse(car);
+    public CarResponse getCarById(@NotNull final UUID id) {
+        final Car car = this.carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id));
+        return this.mapper.toResponse(car);
     }
 
     @Transactional
     public List<CarResponse> getAllCars() {
-        return carRepository.findAll().stream().map(mapper::toResponse).collect(Collectors.toList());
+        return this.carRepository.findAll().stream().map(this.mapper::toResponse).collect(Collectors.toList());
     }
 
     @Transactional
-    public CarResponse updateCar(UUID id, CarCreateRequest request) {
-        Car car = carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id));
-        Owner owner = Optional.ofNullable(request.getOwnerId()).map(ownerId -> ownerRepository.findById(ownerId).orElseThrow(() -> new OwnerNotFoundException(ownerId))).orElse(car.getOwner());
-        car = mapper.update(car, request, owner);
-        return mapper.toResponse(car);
+    public CarResponse updateCar(@NotNull final UUID id, @NotNull @Valid final CarCreateRequest request) {
+        Car car = this.carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(id));
+        final Owner owner = Optional.ofNullable(request.getOwnerId()).map(ownerId -> this.ownerRepository.findById(ownerId).orElseThrow(() -> new OwnerNotFoundException(ownerId))).orElse(car.getOwner());
+        car = this.mapper.update(car, request, owner);
+        return this.mapper.toResponse(car);
     }
 
     @Transactional
-    public void deleteCar(UUID id) {
-        carRepository.deleteById(id);
+    public void deleteCar(@NotNull final UUID id) {
+        this.carRepository.deleteById(id);
     }
 }

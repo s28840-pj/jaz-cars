@@ -12,27 +12,27 @@ public class CarController implements CarApi {
     private CarService carService;
 
     @Override
-    public CarResponse createCar(CarCreateRequest request) {
-        return carService.createCar(request);
+    public CarResponse createCar(final CarCreateRequest request) {
+        return this.carService.createCar(request);
     }
 
     @Override
-    public CarResponse getCarById(UUID id) {
-        return carService.getCarById(id);
+    public CarResponse getCarById(final UUID id) {
+        return this.carService.getCarById(id);
     }
 
     @Override
     public List<CarResponse> getAllCars() {
-        return carService.getAllCars();
+        return this.carService.getAllCars();
     }
 
     @Override
-    public CarResponse updateCar(UUID id, CarCreateRequest request) {
-        return carService.updateCar(id, request);
+    public CarResponse updateCar(final UUID id, final CarCreateRequest request) {
+        return this.carService.updateCar(id, request);
     }
 
     @Override
-    public void deleteCar(UUID id) {
-        carService.deleteCar(id);
+    public void deleteCar(final UUID id) {
+        this.carService.deleteCar(id);
     }
 }

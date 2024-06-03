@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableConfigurationProperties
 public class CarsApplication {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(CarsApplication.class, args);
     }
 }

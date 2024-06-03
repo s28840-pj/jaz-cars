@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import java.util.UUID;
 
 public class OwnerNotFoundException extends BaseException {
-    public OwnerNotFoundException(@NonNull UUID id) {
+    public OwnerNotFoundException(@NonNull final UUID id) {
         super("Owner with id " + id + " not found");
     }
 
